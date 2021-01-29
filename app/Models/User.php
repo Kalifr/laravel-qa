@@ -34,10 +34,19 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be cast to native types.
-     *
+     * 
      * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function question(){
+        return $this->hasMany(Questions::class);
+    }
+
+    public function setTitleAttribute($value) {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = str_slug($value);
+    }
 }
